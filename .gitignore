@@ -1,3 +1,5 @@
 
 game/images.rpa
 *.rpyc
+log.txt
+*.rpyb
