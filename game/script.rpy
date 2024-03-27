@@ -35,4 +35,8 @@ label start:
 
     if persistent.playthrough == 0:
         $ style.say_window = style.window
-        call ch0 from _call_ch0
+        call ch0
+        
+        call ch0_p2
+
+        call poemboss

@@ -483,7 +483,6 @@ screen quick_menu():
     zorder 100
 
     if quick_menu:
-
         # Add an in-game quick menu.
         hbox:
             style_prefix "quick"
@@ -491,15 +490,11 @@ screen quick_menu():
             xalign 0.5
             yalign 0.995
 
-            #textbutton _("Back") action Rollback()
             textbutton _("History") action ShowMenu('history')
             textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Auto") action Preference("auto-forward", "toggle")
-            #textbutton _("Save") action ShowMenu('save')
-            #textbutton _("Load") action ShowMenu('load')
-            #textbutton _("Q.Save") action QuickSave()
-            #textbutton _("Q.Load") action QuickLoad()
             textbutton _("Settings") action ShowMenu('preferences')
+
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -508,6 +503,7 @@ screen quick_menu():
 #    config.overlay_screens.append("quick_menu")
 
 default quick_menu = True
+default player_input_disable = False
 
 #style quick_button is default
 #style quick_button_text is button_text
@@ -531,19 +527,38 @@ style quick_button_text:
 ## to other menus, and to start the game.
 
 init python:
+
     def FinishEnterName():
         if not player: return
         persistent.playername = player
         renpy.save_persistent()
         renpy.hide_screen("name_input")
-        renpy.show_screen("white_name_input", message="... Y'know what, enter a second name.", ok_action=Function(RealFinishEnterName))
-
-    def RealFinishEnterName():
-        if not w_name: return
-        persistent.whitename = w_name
-        renpy.save_persistent()
-        renpy.hide_screen("white_name_input")
         renpy.jump_out_of_context("start")
+
+    def NextText():
+        global nt
+        nt += 1
+        renpy.hide_screen("NextText")
+
+    def Breathe():
+        renpy.hide_screen("NextText")
+    messages = [
+    "Is anything real?",
+    "Is our suffering real?",
+    "Why do we suffer?",
+    "There is no escape.",
+    "All we can do is endure.",
+    "Endure and stay determined.",
+    "Believing that there's something better ahead.",
+    "...",
+    "There might still be hope for you yet.",
+    "Just remember to breathe.",
+    "Nice deep breaths.",
+    "And everything will be okay.",
+    ]
+
+$ splash_message = renpy.random.choice(messages)
+        
 
 screen navigation():
 
@@ -1777,6 +1792,34 @@ screen name_input(message, ok_action):
 
             textbutton _("OK") action ok_action
 
+screen NextText(message, ok_action):
+
+
+    modal True
+
+    zorder 200
+
+    style_prefix "confirm"
+
+    add "gui/overlay/confirm.png"
+
+    frame:
+
+        has vbox:
+            xalign .5
+            yalign .5
+            spacing 30
+
+        label _(message):
+            style "confirm_prompt"
+            xalign 0.5
+
+        hbox:
+            xalign 0.5
+            spacing 100
+
+            textbutton _("OK") action ok_action
+
 init -501 screen white_name_input(message, ok_action):
 
 
@@ -2248,3 +2291,52 @@ init:
 
 screen countdown:
     timer 0.01 repeat True action If(time > 0, true=SetVariable('time', time - 0.01), false=[Hide('countdown'), Jump(timer_jump)])
+
+screen player_input_disable():
+    key "K_ESCAPE" action NullAction()
+    key "mouseup_3" action NullAction()
+    key "mouseup_1" action NullAction()
+    key "K_RETURN" action NullAction()
+    key "K_SPACE" action NullAction()
+    key "K_KP_ENTER" action NullAction()
+    key "joy_dismiss" action NullAction() 
+    key "ctrl_K_LEFT" action NullAction() 
+    key "K_TAB" action NullAction() 
+    key "shift_K_PERIOD" action NullAction() 
+    key ">" action NullAction() 
+
+
+
+screen fakeexception:
+    
+    add "#dadada"
+    add Text("An exception has occurred.", size=40, style="_default"):
+        xpos 0.1 ypos 0.05
+    add Text("While running game code:", size=24, style="_default"):
+        xpos 0.1 ypos 0.15
+    add Text("File \"game/script-ch¥.rpy\", line 712, in script", size=18, style="_default"):
+        xpos 0.115 ypos 0.2
+    add Text("Exception: Possible infinite loop.", size=18, style="_default"):
+        xpos 0.106 ypos 0.231
+    add Text("Full traceback:", size=24, style="_default"):
+        xpos 0.1 ypos 0.3
+    add Text("File \"game/script-ch¥.rpy\", line 712, in script", size=18, style="_default"):
+        xpos 0.115 ypos 0.35
+    add Text("File “C:\Windows\System32\”, deleting this file might fix the issue.", size=18, style="_default"):
+        xpos 0.115 ypos 0.381
+    add Text("Exception: Possible infinite loop.", size=18, style="_default"):
+        xpos 0.106 ypos 0.412
+    add Text("Windows-8-6.2.9200", size=18, style="_default"):
+        xpos 0.106 ypos 0.472
+    add Text("Ren'Py 7.7.0.24012702", size=18, style="_default"):
+        xpos 0.106 ypos 0.503
+    add Text("Doki Doki Her Story 1.0", size=18, style="_default"):
+        xpos 0.106 ypos 0.534
+    if nt < 12:
+        hbox:
+            align (0.882, 0.93)
+            textbutton "Quit" action If(nt < 12, Show(screen="NextText", message=[messages[nt]], ok_action=Function(NextText)))
+    else:
+        hbox:
+            align (0.882, 0.93)
+            textbutton "Breathe" action [Hide("fakeexception"), Jump("ch0_breathe")]

@@ -182,6 +182,7 @@ define audio.wn12 = "mod_assets/bgm/warpednewtwelve.ogg" # Silver & Emerald
 define audio.wn13 = "mod_assets/bgm/warpednewthirteen.ogg" # White Salvation
 define audio.wn14 = "mod_assets/bgm/warpednewfourteen.ogg" # Ohayou, Rikka!
 #define audio.wn15 = "mod_assets/bgm/warpednewfifteen.ogg" # Broken Ascension
+define audio.wn20 = "mod_assets/bgm/warpednewtwenty.ogg" # Deep Breaths
 define audio.wnw = "mod_assets/bgm/yuri-wrongopt.ogg" # Yuri-WrongOPT
 define audio.wnf = "mod_assets/bgm/nat-silverforce.ogg" # Natsuki
 define audio.wo2 = "mod_assets/bgm/warpedoldtwo.ogg" # Play With Me (Celebration!)
@@ -260,6 +261,7 @@ image bg corridor = "bg/corridor.png" # The hallway BG
 image bg club_day = "bg/club.png" # The club BG
 image bg club_night = "mod_assets/bg/clubnight.png"
 image bg cafeteria = "mod_assets/bg/cafeteria.png" # Cafeteria by Noraneko Games
+image bg music_room = "mod_assets/bg/music-room.png" # DDLC+ BG
 image bg club_day2: # Glitched Club BG
     choice:
         "bg club_day"
@@ -356,6 +358,10 @@ label kotog:
     show noise onlayer front:
         alpha 0.3
         easeout 0.35 alpha 0
+
+image exception_bg = "#dadada"
+image fake_exception = Text("An exception has occurred.", size=40, style="_default")
+image fake_exception2 = Text("File \"game/script-ch5.rpy\", line 307\nSee traceback.txt for details.", size=20, style="_default")
 
 # This image shows a glitched screen during Act 2 poem sharing with Yuri.
 image bg glitch = LiveTile("bg/glitch.jpg")
@@ -1698,7 +1704,16 @@ image yuri glitch2:
     pause 0.3
     "yuri/0b.png"
     pause 0.3
-    "yuri 1"
+    "yuri/0a.png"
+    pause 0.1
+    "yuri/0b.png"
+    pause 0.5
+    "yuri/0a.png"
+    pause 0.3
+    "yuri/0b.png"
+    pause 0.3
+    "yuri 1a"
+    
 
 # These image declarations show Yuri's moving eyes in Act 2.
 image yuri eyes = LiveComposite((1280, 720), (0, 0), "yuri/eyes1.png", (0, 0), "yuripupils")
@@ -2046,6 +2061,12 @@ image mc 4x = im.Composite((960, 960), (0, 0), "mod_assets/canonmc_assets/4.png"
 image mc 4y = im.Composite((960, 960), (0, 0), "mod_assets/canonmc_assets/4.png", (0, 0), "mod_assets/canonmc_assets/y.png")
 image mc 4z = im.Composite((960, 960), (0, 0), "mod_assets/canonmc_assets/4.png", (0, 0), "mod_assets/canonmc_assets/z.png")
 
+image km 1a = im.Composite((960, 960), (0, 0), "mod_assets/sprites/km.png")
+
+image kf 1a = im.Composite((960, 960), (0, 0), "mod_assets/sprites/kf.png")
+
+image na 1a = im.Composite((960, 960), (0, 0), "mod_assets/sprites/naomi.png")
+
 ## Character Variables
 # This is where the characters are declared in the mod.
 # To define a new character with assets, declare a character variable like in this example:
@@ -2058,15 +2079,13 @@ define mc = DynamicCharacter('player', image='mc', what_prefix='"', what_suffix=
 define s = DynamicCharacter('s_name', image='sayori', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define m = DynamicCharacter('m_name', image='monika', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", window_background=Image("mod_assets/gui/celebtextbox6.png", xalign=0.5, yalign=1.0), who_outlines=[ (3, "#40e482")  ])
 define n = DynamicCharacter('n_name', image='natsuki', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", window_background=Image("mod_assets/gui/celebtextbox3.png", xalign=0.5, yalign=1.0), who_outlines=[ (3, "#ff96d1")  ])
-define y = DynamicCharacter('y_name', image='yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
+define y = DynamicCharacter('y_name', image='yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", window_background=Image("mod_assets/gui/celebtextbox4.png", xalign=0.5, yalign=1.0), who_outlines=[ (3, "#d58bfc")  ])
 define ny = Character('Nat & Yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define t = Character('Teacher', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define r = DynamicCharacter('r_name', image='rikka', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define k = DynamicCharacter('k_name', image='kotonoha', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", window_background=Image("mod_assets/gui/celebtextbox2.png", xalign=0.5, yalign=1.0), who_outlines=[ (3, "#9f9f9f")  ])
 define km = DynamicCharacter('km_name', image='mother', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define kf = DynamicCharacter('kf_name', image='father', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
-define w = DynamicCharacter('w_name', image='white', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
-define w = DynamicCharacter('d_name', image='double', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define u = Character('?????', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define vm = Character('???', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define na = DynamicCharacter('na_name', image='naomi', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
