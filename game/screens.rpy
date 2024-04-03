@@ -2289,8 +2289,8 @@ label choose_language:
 init:
     $ timer_jump = 0
 
-screen countdown:
-    timer 0.01 repeat True action If(time > 0, true=SetVariable('time', time - 0.01), false=[Hide('countdown'), Jump(timer_jump)])
+#screen countdown:
+#    timer 0.01 repeat True action If(time > 0, true=SetVariable('time', time - 0.01), false=[Hide('countdown'), Jump(timer_jump)])
 
 screen player_input_disable():
     key "K_ESCAPE" action NullAction()
@@ -2305,7 +2305,17 @@ screen player_input_disable():
     key "shift_K_PERIOD" action NullAction() 
     key ">" action NullAction() 
 
-
+screen my_timer():
+    text "[clock]" size 72 color "#FFF"
+    if clock < 120:
+        timer 1 repeat True action [
+                SetVariable("clock", clock + 1),
+                renpy.restart_interaction
+            ]
+    else:
+        timer 1 action [
+                Hide("my_timer")
+            ]
 
 screen fakeexception:
     

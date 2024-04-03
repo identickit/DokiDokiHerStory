@@ -117,29 +117,28 @@ init python:
 
         # A way better while loop than Dan did
         progress = 1
+        progresspb = 1
         while progress <= 3:
             # This section grabs 10 random words and stores the word in a list.
             random_words = []
+            # While the length of the list is less than 10.
             while len(random_words) < 10:
+                print(random_words)
+                #Var word is decided randomly from the list of wordList keys.
                 word = random.choice(list(wordList.keys()))
-                if wordList[word] == progress:
+                #If the current wordList word's value is equal to the progress, then add to the list.
+                if wordList[word] in (progresspb,progresspb+1):
                     random_words.append(word)
-                # Remove the word once its picked and added from the local copy.
-                del wordList[word]
+                    # Remove the word from the full dictionary once its picked and added from the local copy (while it equals a certain value).
+                    del wordList[word]
 
             # Display the poem game
             poemword = renpy.call_screen("poem_test", words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
 
-            # If we are not in a bugged poem game state, do normal stuff, else do buggy stuff
-            if not poemgame_glitch:
-                if persistent.playthrough != 3:
-                    renpy.play(gui.activate_sound)
-            else:
-                persistent.CONDITION = 5
-                persistent.playthrough = 20
-                renpy.play(gui.activate_sound)
+            renpy.play(gui.activate_sound)
                     
             # Adds points to the characters and progress by 1.
+            progresspb += 2
             progress += 1
     
     # End of the game
@@ -147,21 +146,16 @@ init python:
         poemwinner[chapter] = max(chibis, key=lambda c: chibis[c].charPointTotal)
 
 
-
-screen poem_test(words, progress, poemgame_glitch):
-    default numWords = 20
+#Words argument is equal to random_words list.
+screen poem_test(words, progress, poemgame_glitch, progresspb = 1):
+    default numWords = 10
     
     if progress is not None:
         fixed:
             xpos 810
             
             python:
-                if persistent.playthrough == 2 and chapter == 2:
-                    pstring = ""
-                    for i in range(progress):
-                        pstring += "1"
-                else:
-                    pstring = str(progress)
+                pstring = str(progress)
 
             text pstring + "/" + str(numWords):
                 style "poemgame_text"
@@ -181,8 +175,15 @@ screen poem_test(words, progress, poemgame_glitch):
                         wordString = words[i]
 
                     textbutton wordString:
-                        action Return(wordString)
-                        text_style "poemgame_text"
+                        if words[i] == "lavender":
+                            if 5 > clock >= 3:
+                                action Return(wordString)
+                                text_style "poemgame_text"
+                            else:
+                                text_style "poemgame_text"
+                        else:
+                            action Return(wordString)
+                            text_style "poemgame_text"
 
         fixed:
             xpos 680
@@ -197,8 +198,16 @@ screen poem_test(words, progress, poemgame_glitch):
                         wordString = words[5+i]
 
                     textbutton wordString:
-                        action Return(wordString)
-                        text_style "poemgame_text"
+                        if words[5+i] == "lavender":
+                            if 12 > clock >= 9:
+                                action Return(wordString)
+                                text_style "poemgame_text"
+                            else:
+                                text_style "poemgame_text"
+                        else:
+                            action Return(wordString)
+                            text_style "poemgame_text"
+
 
 label poemboss(transition=True):
     stop music fadeout 2.0
@@ -211,18 +220,22 @@ label poemboss(transition=True):
     $ config.allow_skipping = False
     $ allow_skipping = False
 
+    default firstword = False
+
     call screen dialog("Look, I appreciate your interest in this project...", ok_action=Return())
     call screen dialog("But this one isn't supposed to have any poem games.", ok_action=Return())
-    call screen dialog("I’m not entirely sure why Yuri advised Kotonoha to write random words...", ok_action=Return())
+    call screen dialog("I'm not entirely sure why Yuri advised Kotonoha to write random words...", ok_action=Return())
     call screen dialog("However, unfortunately I need to ask you to stop playing.", ok_action=Return())
+    pause 2.0
     call screen dialog("When you get bored here, you can show yourself out.", ok_action=Return())
+    $ run_input ("", "Accessing mic...")
+    pause 2.0
+    hide screen console_screen
+    show screen my_timer
+    play music te01
     
     $ poem_game_start()
     $ poem_game_finish()
-
-    # Call the new poem eye scare label if we are in Act 2 and we yet seen eyes
-    if persistent.playthrough == 2 and persistent.seen_eyes == None and renpy.random.randint(0,5) == 0:
-        call poem_eye_scare from _call_poem_eye_scare
 
     $ config.allow_skipping = True
     $ allow_skipping = True

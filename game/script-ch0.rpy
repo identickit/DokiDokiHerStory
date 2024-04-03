@@ -54,7 +54,7 @@ label ch0:
     ##scene 2
     scene bg cafeteria
     with dissolve_scene_full
-    #play music wok
+    play music wok
     k "Mother's gonna to kill me for sure now."
     show yuri turned curi me oe at t11
     y "I'm sure whatever it is isn't as bad as it seems."
