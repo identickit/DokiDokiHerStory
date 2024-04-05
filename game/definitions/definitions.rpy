@@ -191,6 +191,7 @@ define audio.wbr = "mod_assets/bgm/warpedbrokenruined.ogg" # EPIPHANY
 define audio.wok = "mod_assets/bgm/ohayoukotonoha.ogg" # Ohayou, Kotonoha.
 
 define audio.te01 = "mod_assets/bgm/tester01.ogg" #first clip
+define audio.te02 = "mod_assets/bgm/tester02.ogg" #second clip
 
 define audio.tmonika = "<loop 4.444>bgm/5_monika.ogg" # Okay Everyone! (Monika)
 define audio.tsayori = "<loop 4.444>bgm/5_sayori.ogg" # Okay Everyone! (Sayori)

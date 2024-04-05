@@ -102,8 +102,11 @@ init python:
     # Declare Chibi variables for transforms and points.
     chibi_s = Chibi('sayori')
 
+    telist = [audio.te01, audio.te02]
+    poemf = True
+
     # Start of the poem game in python
-    def poem_game_start():
+    def poem_game_startf():
         played_baa = False
         poemgame_glitch = False
 
@@ -118,12 +121,11 @@ init python:
         # A way better while loop than Dan did
         progress = 1
         progresspb = 1
-        while progress <= 3:
+        while progress <= 1:
             # This section grabs 10 random words and stores the word in a list.
             random_words = []
             # While the length of the list is less than 10.
             while len(random_words) < 10:
-                print(random_words)
                 #Var word is decided randomly from the list of wordList keys.
                 word = random.choice(list(wordList.keys()))
                 #If the current wordList word's value is equal to the progress, then add to the list.
@@ -133,13 +135,91 @@ init python:
                     del wordList[word]
 
             # Display the poem game
+            
             poemword = renpy.call_screen("poem_test", words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
 
             renpy.play(gui.activate_sound)
-                    
-            # Adds points to the characters and progress by 1.
+
+            progress += 1
+
+    # Start of the poem game in python
+    def poem_game_start():
+        played_baa = False
+        poemgame_glitch = False
+        poemf = False
+
+        # Resets points of every character
+        for c in chibis:
+            chibis[c].reset()
+        
+        # Makes a copy of the full dictionary for editing purposes.
+        
+        wordList = full_wordlist.copy()
+
+        # A way better while loop than Dan did
+        progress = 1
+        progresspb = 3
+        while (renpy.music.is_playing('music')):
+            while progress <= 2:
+                # This section grabs 10 random words and stores the word in a list.
+                random_words = []
+                # While the length of the list is less than 10.
+                while len(random_words) < 10:
+                    #Var word is decided randomly from the list of wordList keys.
+                    word = random.choice(list(wordList.keys()))
+                    #If the current wordList word's value is equal to the progress, then add to the list.
+                    if wordList[word] in (progresspb,progresspb+1):
+                        random_words.append(word)
+                        # Remove the word from the full dictionary once its picked and added from the local copy (while it equals a certain value).
+                        del wordList[word]
+
+                # Display the poem game
+                poemword = renpy.call_screen("poem_test", words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
+                renpy.play(gui.activate_sound)
+                renpy.music.play(telist[progress], loop=False)
+
+                # Adds points to the characters and progress by 1.
+                progresspb += 2
+                progress += 1
+            
+
+    def poem_game_startpb():
+
+        # Resets points of every character
+        for c in chibis:
+            chibis[c].reset()
+        
+        # Makes a copy of the full dictionary for editing purposes.
+        
+        wordList = full_wordlist.copy()
+
+        # A way better while loop than Dan did
+        progress = 1
+        progresspb = 1
+        while progress <= 1:
+            # This section grabs 10 random words and stores the word in a list.
+            random_words = []
+            # While the length of the list is less than 10.
+            while len(random_words) < 10:
+                #Var word is decided randomly from the list of wordList keys.
+                word = random.choice(list(wordList.keys()))
+                #If the current wordList word's value is equal to the progress, then add to the list.
+                if wordList[word] in (progresspb,progresspb+1):
+                    random_words.append(word)
+                    # Remove the word from the full dictionary once its picked and added from the local copy (while it equals a certain value).
+                    del wordList[word]
+
+            # Display the poem game
+            while (renpy.music.is_playing('music')):
+                poemword = renpy.call_screen("poem_test", words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
+            else:
+                progress += 1
+
+            renpy.play(gui.activate_sound)
+
             progresspb += 2
             progress += 1
+            
     
     # End of the game
     def poem_game_finish():
@@ -148,42 +228,54 @@ init python:
 
 #Words argument is equal to random_words list.
 screen poem_test(words, progress, poemgame_glitch, progresspb = 1):
-    default numWords = 10
-    
-    if progress is not None:
-        fixed:
-            xpos 810
-            
-            python:
-                pstring = str(progress)
 
-            text pstring + "/" + str(numWords):
-                style "poemgame_text"
-                ypos 80
+    if progress is not None:
 
         # Two fixed areas for the two sections of poemgame we have
         fixed:
             xpos 440
             ypos 160
-
+            
             viewport:
                 has vbox
                 spacing 56
 
-                for i in range(5):
-                    python:
-                        wordString = words[i]
+                if poemf == True:
+                    for i in range(5):
+                        python:
+                            wordString = words[i]
 
-                    textbutton wordString:
-                        if words[i] == "lavender":
-                            if 5 > clock >= 3:
-                                action Return(wordString)
-                                text_style "poemgame_text"
+                        textbutton wordString:
+                            if words[i] == "silver":
+                                if clock >= 3:
+                                    action Return(wordString)
+                                    text_style "poemgame_text"
+                                else:
+                                    text_style "poemgame_text"
                             else:
                                 text_style "poemgame_text"
-                        else:
-                            action Return(wordString)
-                            text_style "poemgame_text"
+
+                else:
+                    for i in range(5):
+                        python:
+                            wordString = words[i]
+
+                        textbutton wordString:
+
+                            if words[i] == "lavender":
+                                if 12 >= clock >= 9:
+                                    action Return(wordString)
+                                    text_style "poemgame_text"
+                                else:
+                                    text_style "poemgame_text"
+
+                            elif progress == 2:
+                                text_style "poemgame_text"
+
+                            else:
+                                action Return(wordString)
+                                text_style "poemgame_text"
+                    
 
         fixed:
             xpos 680
@@ -193,20 +285,41 @@ screen poem_test(words, progress, poemgame_glitch, progresspb = 1):
                 has vbox
                 spacing 56
 
-                for i in range(5):
-                    python:
-                        wordString = words[5+i]
+                if poemf == True:
+                    for i in range(5):
+                        python:
+                            wordString = words[5+i]
 
-                    textbutton wordString:
-                        if words[5+i] == "lavender":
-                            if 12 > clock >= 9:
-                                action Return(wordString)
-                                text_style "poemgame_text"
+                        textbutton wordString:
+                            if words[5+i] == "silver":
+                                if clock >= 3:
+                                    action Return(wordString)
+                                    text_style "poemgame_text"
+                                else:
+                                    text_style "poemgame_text"
                             else:
                                 text_style "poemgame_text"
-                        else:
-                            action Return(wordString)
-                            text_style "poemgame_text"
+
+                else:
+                    for i in range(5):
+                        python:
+                            wordString = words[5+i]
+
+                        textbutton wordString:
+                            
+                            if words[5+i] == "lavender":
+                                if 12 >= clock >= 9:
+                                    action Return(wordString)
+                                    text_style "poemgame_text"
+                                else:
+                                    text_style "poemgame_text"
+
+                            elif progress == 2:
+                                text_style "poemgame_text"
+
+                            else:
+                                action Return(wordString)
+                                text_style "poemgame_text"
 
 
 label poemboss(transition=True):
@@ -220,9 +333,12 @@ label poemboss(transition=True):
     $ config.allow_skipping = False
     $ allow_skipping = False
 
-    default firstword = False
-
-    call screen dialog("Look, I appreciate your interest in this project...", ok_action=Return())
+    show screen my_timer
+    show screen dialog("Look, I appreciate your interest in this project...", ok_action=Hide("dialog"))
+    $ poem_game_startf()
+    hide screen my_timer
+    $ clock = 0
+    $ poemf = False
     call screen dialog("But this one isn't supposed to have any poem games.", ok_action=Return())
     call screen dialog("I'm not entirely sure why Yuri advised Kotonoha to write random words...", ok_action=Return())
     call screen dialog("However, unfortunately I need to ask you to stop playing.", ok_action=Return())
@@ -231,10 +347,12 @@ label poemboss(transition=True):
     $ run_input ("", "Accessing mic...")
     pause 2.0
     hide screen console_screen
+    pause 2.0
     show screen my_timer
     play music te01
     
     $ poem_game_start()
+    $ poem_game_startpb()
     $ poem_game_finish()
 
     $ config.allow_skipping = True
