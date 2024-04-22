@@ -100,9 +100,9 @@ image menu_art_k:
     zoom 0.95
     menu_art_move(0.95, 530, 0.95)
 
-image menu_art_m:
+image menu_art_y:
     subpixel True
-    "gui/menu_art_m.png"
+    "gui/menu_art_y.png"
     xcenter 1000
     ycenter 560
     zoom 1.00

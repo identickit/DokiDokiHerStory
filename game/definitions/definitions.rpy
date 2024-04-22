@@ -183,15 +183,23 @@ define audio.wn13 = "mod_assets/bgm/warpednewthirteen.ogg" # White Salvation
 define audio.wn14 = "mod_assets/bgm/warpednewfourteen.ogg" # Ohayou, Rikka!
 #define audio.wn15 = "mod_assets/bgm/warpednewfifteen.ogg" # Broken Ascension
 define audio.wn20 = "mod_assets/bgm/warpednewtwenty.ogg" # Deep Breaths
+define audio.wnb = "mod_assets/bgm/warpednewboss.ogg" # Dreams of Lavender and Silver
 define audio.wnw = "mod_assets/bgm/yuri-wrongopt.ogg" # Yuri-WrongOPT
 define audio.wnf = "mod_assets/bgm/nat-silverforce.ogg" # Natsuki
 define audio.wo2 = "mod_assets/bgm/warpedoldtwo.ogg" # Play With Me (Celebration!)
 define audio.wo3 = "mod_assets/bgm/warpedoldthree.ogg" # Dreams of Love and Literature (Celebration!)
 define audio.wbr = "mod_assets/bgm/warpedbrokenruined.ogg" # EPIPHANY
 define audio.wok = "mod_assets/bgm/ohayoukotonoha.ogg" # Ohayou, Kotonoha.
+define audio.wnx = "mod_assets/bgm/xiswendepraw.ogg" # Her Theme (Reversed)
 
 define audio.te01 = "mod_assets/bgm/tester01.ogg" #first clip
 define audio.te02 = "mod_assets/bgm/tester02.ogg" #second clip
+define audio.te03 = "mod_assets/sfx/tester03.ogg" #
+define audio.te04 = "mod_assets/sfx/tester04.ogg" #
+define audio.te05 = "mod_assets/sfx/tester05.ogg" #
+define audio.te06 = "mod_assets/sfx/tester06.ogg" #
+define audio.te07 = "mod_assets/sfx/tester07.ogg" #
+define audio.te08 = "mod_assets/sfx/tester08.ogg" #
 
 define audio.tmonika = "<loop 4.444>bgm/5_monika.ogg" # Okay Everyone! (Monika)
 define audio.tsayori = "<loop 4.444>bgm/5_sayori.ogg" # Okay Everyone! (Sayori)
@@ -240,9 +248,11 @@ define audio.wsc = "mod_assets/sfx/scrape.ogg"
 define audio.wsi = "mod_assets/sfx/impact.ogg"
 define audio.wsw = "mod_assets/sfx/writing.ogg"
 define audio.wst = "mod_assets/sfx/typing.ogg"
+define audio.wsb = "mod_assets/sfx/bell.ogg"
 define audio.glitch2 = "mod_assets/sfx/glitch2.ogg"
 define audio.boot = "<loop 4.000>mod_assets/sfx/boot.ogg"
 define audio.wnh = "mod_assets/sfx/warpednewhorn.ogg"
+define audio.buzz = "mod_assets/sfx/buzz.ogg"
 
 ## Backgrounds 
 image black = "#000000"
@@ -264,6 +274,7 @@ image bg club_day = "bg/club.png" # The club BG
 image bg club_night = "mod_assets/bg/clubnight.png"
 image bg cafeteria = "mod_assets/bg/cafeteria.png" # Cafeteria by Noraneko Games
 image bg music_room = "mod_assets/bg/music-room.png" # DDLC+ BG
+image bg cemetery = "mod_assets/bg/cemetery.png"
 image bg club_day2: # Glitched Club BG
     choice:
         "bg club_day"
@@ -295,6 +306,126 @@ image bg qgsayori_bedroom:
 
 image bg notebook = "bg/notebook.png" # Poem Game Notebook Scene
 image bg notebook-glitch = "bg/notebook-glitch.png" # Glitched Poem Game BG
+
+image notebookg1:
+    choice:
+        "bg/notebook.png"
+    choice:
+        "mod_assets/bg/nbg9.png"
+    choice:
+        "mod_assets/bg/nbg8.png"
+    choice:
+        "mod_assets/bg/nbg7.png"
+    choice:
+        "mod_assets/bg/nbg6.png"
+    choice:
+        "mod_assets/bg/nbg5.png"
+    choice:
+        "mod_assets/bg/nbg4.png"
+    choice:
+        "mod_assets/bg/nbg3.png"
+    choice:
+        "mod_assets/bg/nbg2.png"
+    choice:
+        "mod_assets/bg/nbg1.png"
+    pause 3.75
+    repeat
+
+image notebookg2:
+    choice:
+        "bg/notebook.png"
+    choice:
+        "mod_assets/bg/nbg9.png"
+    choice:
+        "mod_assets/bg/nbg8.png"
+    choice:
+        "mod_assets/bg/nbg7.png"
+    choice:
+        "mod_assets/bg/nbg6.png"
+    choice:
+        "mod_assets/bg/nbg5.png"
+    choice:
+        "mod_assets/bg/nbg4.png"
+    choice:
+        "mod_assets/bg/nbg3.png"
+    choice:
+        "mod_assets/bg/nbg2.png"
+    choice:
+        "mod_assets/bg/nbg1.png"
+    pause 3
+    repeat
+
+image notebookg3:
+    choice:
+        "bg/notebook.png"
+    choice:
+        "mod_assets/bg/nbg9.png"
+    choice:
+        "mod_assets/bg/nbg8.png"
+    choice:
+        "mod_assets/bg/nbg7.png"
+    choice:
+        "mod_assets/bg/nbg6.png"
+    choice:
+        "mod_assets/bg/nbg5.png"
+    choice:
+        "mod_assets/bg/nbg4.png"
+    choice:
+        "mod_assets/bg/nbg3.png"
+    choice:
+        "mod_assets/bg/nbg2.png"
+    choice:
+        "mod_assets/bg/nbg1.png"
+    pause 2.25
+    repeat
+
+image notebookg4:
+    choice:
+        "bg/notebook.png"
+    choice:
+        "mod_assets/bg/nbg9.png"
+    choice:
+        "mod_assets/bg/nbg8.png"
+    choice:
+        "mod_assets/bg/nbg7.png"
+    choice:
+        "mod_assets/bg/nbg6.png"
+    choice:
+        "mod_assets/bg/nbg5.png"
+    choice:
+        "mod_assets/bg/nbg4.png"
+    choice:
+        "mod_assets/bg/nbg3.png"
+    choice:
+        "mod_assets/bg/nbg2.png"
+    choice:
+        "mod_assets/bg/nbg1.png"
+    pause 1.5
+    repeat
+
+image notebookg5:
+    choice:
+        "bg/notebook.png"
+    choice:
+        "mod_assets/bg/nbg9.png"
+    choice:
+        "mod_assets/bg/nbg8.png"
+    choice:
+        "mod_assets/bg/nbg7.png"
+    choice:
+        "mod_assets/bg/nbg6.png"
+    choice:
+        "mod_assets/bg/nbg5.png"
+    choice:
+        "mod_assets/bg/nbg4.png"
+    choice:
+        "mod_assets/bg/nbg3.png"
+    choice:
+        "mod_assets/bg/nbg2.png"
+    choice:
+        "mod_assets/bg/nbg1.png"
+    pause 0.75
+    repeat
 
 image bg clubdayg1 = "mod_assets/bg/clubdayg1.png"
 image bg clubdayg2 = "mod_assets/bg/clubdayg2.png"
@@ -336,6 +467,7 @@ image bg gresidential_day:
     pause 0.12
     repeat
 image bg bsod = "mod_assets/bg/bsod.png"
+image bg bsodquit = "mod_assets/bg/bsodquit.png"
 label kotog:
     show m_rectstatic
     show layer master:

@@ -7,6 +7,8 @@ init python:
     # This dictionary stores every poemword and the class preference values of each character.
     full_wordlist = {}
 
+    spellt = ["monika", "yuri", "sayori", "natsuki", "kotonoha","rikka","mother","notebook","eighteen","reality","elevated","final"]
+
     # This class holds a word, and point values for each of the four heroines
     class PoemWord:
         def __init__(self, s):
@@ -102,7 +104,8 @@ init python:
     # Declare Chibi variables for transforms and points.
     chibi_s = Chibi('sayori')
 
-    telist = [audio.te01, audio.te02]
+    pbsfx = [audio.te03, audio.te04, audio.te05, audio.te06, audio.te07, audio.te08]
+    clockvals = ((6,7),(6,9),(5,11),(5,13),(4,15),(4,17),(3,19),(3,21),(2,23),(2,25),(1,27),(1,29))
     poemf = True
 
     # Start of the poem game in python
@@ -114,8 +117,7 @@ init python:
         for c in chibis:
             chibis[c].reset()
         
-        # Makes a copy of the full dictionary for editing purposes.
-        
+        # Makes a copy of the full dictionary for editing purposes.       
         wordList = full_wordlist.copy()
 
         # A way better while loop than Dan did
@@ -133,13 +135,9 @@ init python:
                     random_words.append(word)
                     # Remove the word from the full dictionary once its picked and added from the local copy (while it equals a certain value).
                     del wordList[word]
-
-            # Display the poem game
-            
+            # Display the poem game          
             poemword = renpy.call_screen("poem_test", words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
-
-            renpy.play(gui.activate_sound)
-
+            renpy.play(gui.activate_sound)           
             progress += 1
 
     # Start of the poem game in python
@@ -159,44 +157,7 @@ init python:
         # A way better while loop than Dan did
         progress = 1
         progresspb = 3
-        while (renpy.music.is_playing('music')):
-            while progress <= 2:
-                # This section grabs 10 random words and stores the word in a list.
-                random_words = []
-                # While the length of the list is less than 10.
-                while len(random_words) < 10:
-                    #Var word is decided randomly from the list of wordList keys.
-                    word = random.choice(list(wordList.keys()))
-                    #If the current wordList word's value is equal to the progress, then add to the list.
-                    if wordList[word] in (progresspb,progresspb+1):
-                        random_words.append(word)
-                        # Remove the word from the full dictionary once its picked and added from the local copy (while it equals a certain value).
-                        del wordList[word]
-
-                # Display the poem game
-                poemword = renpy.call_screen("poem_test", words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
-                renpy.play(gui.activate_sound)
-                renpy.music.play(telist[progress], loop=False)
-
-                # Adds points to the characters and progress by 1.
-                progresspb += 2
-                progress += 1
-            
-
-    def poem_game_startpb():
-
-        # Resets points of every character
-        for c in chibis:
-            chibis[c].reset()
-        
-        # Makes a copy of the full dictionary for editing purposes.
-        
-        wordList = full_wordlist.copy()
-
-        # A way better while loop than Dan did
-        progress = 1
-        progresspb = 1
-        while progress <= 1:
+        while progress <= 2:
             # This section grabs 10 random words and stores the word in a list.
             random_words = []
             # While the length of the list is less than 10.
@@ -206,27 +167,119 @@ init python:
                 #If the current wordList word's value is equal to the progress, then add to the list.
                 if wordList[word] in (progresspb,progresspb+1):
                     random_words.append(word)
-                    # Remove the word from the full dictionary once its picked and added from the local copy (while it equals a certain value).
+                    # Remove the word from the full dictionary once its picked and added from the local copy.
                     del wordList[word]
-
             # Display the poem game
-            while (renpy.music.is_playing('music')):
-                poemword = renpy.call_screen("poem_test", words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
-            else:
-                progress += 1
-
+            poemword = renpy.call_screen("poem_test", words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
             renpy.play(gui.activate_sound)
-
+            renpy.music.play("mod_assets/bgm/tester02.ogg", loop=False)
+            # Adds points to the characters and progress by 1.
             progresspb += 2
             progress += 1
             
+    #Starts the actual poem boss mini-game
+    def poem_game_startpb():
+        played_baa = False
+        poemgame_glitch = False
+
+        # Resets points of every character
+        for c in chibis:
+            chibis[c].reset()
+
+        # A way better while loop than Dan did
+        progress = 1
+        progresspb = 7
+        while progress <= 12:
+            # Makes a copy of the full dictionary for editing purposes.
+            wordList = full_wordlist.copy()
+            # This section grabs 10 random words and stores the word in a list.
+            random_words = []
+            # While the length of the list is less than 10.
+            poem_game_loop(random_words, wordList, progresspb)
+            # Display the poem game
+            poemword = renpy.call_screen("poem_testpb", clockvals, progresspb, words=random_words, progress=progress, poemgame_glitch=poemgame_glitch)
+            renpy.play(gui.activate_sound)
+            renpy.play(random.choice(pbsfx))
+            progresspb += 2
+            progress += 1
+
+    #Seperated the while loop for the wordList into it's own function.
+    def poem_game_loop(random_words, wordList, progresspb):
+        while len(random_words) < 10:
+            word = random.choice(list(wordList.keys()))
+            #If the current wordList word's value is equal to the progress, then add to the list.
+            if wordList[word] in (progresspb,progresspb+1):
+                random_words.append(word)
+                # Remove the word from the full dictionary once its picked and added from the local copy.
+                del wordList[word]
     
     # End of the game
     def poem_game_finish():
         poemwinner[chapter] = max(chibis, key=lambda c: chibis[c].charPointTotal)
 
-
+#Screen for the poem boss mini-game.
 #Words argument is equal to random_words list.
+screen poem_testpb(clockvals, progresspb, words, progress, poemgame_glitch):
+
+    #Every few seconds, shuffle around the words.
+    for i in range(12):
+        #if the internal timer is divisible by a certain value and the progress is equal to a certain value, then shuffle.
+        if clock % clockvals[i][0] == 0 and progresspb == clockvals[i][1]:
+            python:
+                random.shuffle(words)
+        #This is scuffed :skull:
+        if progresspb == 11:
+            python:
+                renpy.show("notebookg1")
+        elif progresspb == 15:
+            python:
+                renpy.show("notebookg2")
+        elif progresspb == 19:
+            python:
+                renpy.show("notebookg3")
+        elif progresspb == 23:
+            python:
+                renpy.show("notebookg4")
+        elif progresspb == 27:
+            python:
+                renpy.show("notebookg5")
+
+    if progress is not None:
+        # Two fixed areas for the two sections of poemgame we have
+        fixed:
+            xpos 440
+            ypos 160
+            viewport:
+                has vbox
+                spacing 56
+                for i in range(5):
+                    python:
+                        wordString = words[i]
+                    textbutton wordString:
+                        if words[i] in spellt:
+                            action Return(wordString)
+                            text_style "poemgame_text"
+                        else:
+                            action Jump("bsodquit")
+                            text_style "poemgame_text"
+        fixed:
+            xpos 680
+            ypos 160
+            viewport:
+                has vbox
+                spacing 56
+                for i in range(5):
+                    python:
+                        wordString = words[5+i]
+                    textbutton wordString:
+                        if words[5+i] in spellt:
+                            action Return(wordString)
+                            text_style "poemgame_text"
+                        else:
+                            action Jump("bsodquit")
+                            text_style "poemgame_text"
+            
+
 screen poem_test(words, progress, poemgame_glitch, progresspb = 1):
 
     if progress is not None:
@@ -270,10 +323,14 @@ screen poem_test(words, progress, poemgame_glitch, progresspb = 1):
                                     text_style "poemgame_text"
 
                             elif progress == 2:
-                                text_style "poemgame_text"
+                                if clock > 60 and words[i] == "START":
+                                    action Return(wordString)
+                                    text_style "poemgame_text"
+                                else:
+                                    text_style "poemgame_text"
 
                             else:
-                                action Return(wordString)
+                                action Jump("bsodquit")
                                 text_style "poemgame_text"
                     
 
@@ -315,10 +372,14 @@ screen poem_test(words, progress, poemgame_glitch, progresspb = 1):
                                     text_style "poemgame_text"
 
                             elif progress == 2:
-                                text_style "poemgame_text"
+                                if clock > 60 and words[5+i] == "START":
+                                    action Return(wordString)
+                                    text_style "poemgame_text"
+                                else:
+                                    text_style "poemgame_text"
 
                             else:
-                                action Return(wordString)
+                                action Jump("bsodquit")
                                 text_style "poemgame_text"
 
 
@@ -333,10 +394,10 @@ label poemboss(transition=True):
     $ config.allow_skipping = False
     $ allow_skipping = False
 
-    show screen my_timer
+    show screen pbtimer
     show screen dialog("Look, I appreciate your interest in this project...", ok_action=Hide("dialog"))
     $ poem_game_startf()
-    hide screen my_timer
+    hide screen pbtimer
     $ clock = 0
     $ poemf = False
     call screen dialog("But this one isn't supposed to have any poem games.", ok_action=Return())
@@ -348,12 +409,15 @@ label poemboss(transition=True):
     pause 2.0
     hide screen console_screen
     pause 2.0
-    show screen my_timer
-    play music te01
+    show screen pbtimer
+    $ renpy.music.play("mod_assets/bgm/tester01.ogg", loop=False)
     
     $ poem_game_start()
+    $ clock = 0
+    play music wnb
     $ poem_game_startpb()
-    $ poem_game_finish()
+    hide screen pbtimer
+    call poembossfinish
 
     $ config.allow_skipping = True
     $ allow_skipping = True
@@ -364,6 +428,15 @@ label poemboss(transition=True):
         linear 1.0 alpha 1.0
     pause 1.0
     return
+
+
+label bsodquit:
+    hide screen pbtimer
+    stop music
+    stop audio 
+    scene bg bsodquit
+    pause 6.0
+    $ renpy.quit()
 
 ## Scare code moved as it's own label
 label poem_eye_scare:
@@ -385,179 +458,3 @@ label poem_eye_scare:
     $ quick_menu = True
     return
 
-############ Image definitions start here. #############
-image bg eyes_move:
-    "images/bg/eyes.png"
-    parallel:
-        yoffset 720 ytile 2
-        linear 0.5 yoffset 0
-        repeat
-    parallel:
-        0.1
-        choice:
-            xoffset 20
-            0.05
-            xoffset 0
-        choice:
-            xoffset 0
-        repeat
-        
-image bg eyes:
-    "images/bg/eyes.png"
-
-image s_sticker:
-    "gui/poemgame/s_sticker_1.png"
-    xoffset chibi_s.charOffset xzoom chibi_s.charZoom
-    block:
-        function chibi_s.randomPauseTime
-        parallel:
-            sticker_move_n
-        parallel:
-            function chibi_s.randomMoveTime
-        repeat
-
-image n_sticker:
-    "gui/poemgame/n_sticker_1.png"
-    xoffset chibi_n.charOffset xzoom chibi_n.charZoom
-    block:
-        function chibi_n.randomPauseTime
-        parallel:
-            sticker_move_n
-        parallel:
-            function chibi_n.randomMoveTime
-        repeat
-
-image y_sticker:
-    "gui/poemgame/y_sticker_1.png"
-    xoffset chibi_y.charOffset xzoom chibi_y.charZoom
-    block:
-        function chibi_y.randomPauseTime
-        parallel:
-            sticker_move_n
-        parallel:
-            function chibi_y.randomMoveTime
-        repeat
-
-image y_sticker_cut:
-    "gui/poemgame/y_sticker_cut_1.png"
-    xoffset chibi_y.charOffset xzoom chibi_y.charZoom
-    block:
-        function chibi_y.randomPauseTime
-        parallel:
-            sticker_move_n
-        parallel:
-            function chibi_y.randomMoveTime
-        repeat
-
-image m_sticker:
-    "gui/poemgame/m_sticker_1.png"
-    xoffset chibi_m.charOffset xzoom chibi_m.charZoom
-    block:
-        function chibi_m.randomPauseTime
-        parallel:
-            sticker_move_n
-        parallel:
-            function chibi_m.randomMoveTime
-        repeat
-
-image r_sticker:
-    "mod_assets/rikka_assets/r_sticker_1.png"
-    xoffset chibi_r.charOffset xzoom chibi_r.charZoom
-    block:
-        function chibi_r.randomPauseTime
-        parallel:
-            sticker_move_n
-        parallel:
-            function chibi_r.randomMoveTime
-        repeat
-
-image s_sticker hop:
-    "gui/poemgame/s_sticker_2.png"
-    xoffset chibi_s.charOffset xzoom chibi_s.charZoom
-    sticker_hop
-    xoffset 0 xzoom 1
-    "s_sticker"
-
-image r_sticker hop:
-    "mod_assets/rikka_assets/r_sticker_2.png"
-    xoffset chibi_r.charOffset xzoom chibi_r.charZoom
-    sticker_hop
-    xoffset 0 xzoom 1
-    "r_sticker"
-
-image n_sticker hop:
-    "gui/poemgame/n_sticker_2.png"
-    xoffset chibi_n.charOffset xzoom chibi_n.charZoom
-    sticker_hop
-    xoffset 0 xzoom 1
-    "n_sticker"
-
-image y_sticker hop:
-    "gui/poemgame/y_sticker_2.png"
-    xoffset chibi_y.charOffset xzoom chibi_y.charZoom
-    sticker_hop
-    xoffset 0 xzoom 1
-    "y_sticker"
-
-image y_sticker_cut hop:
-    "gui/poemgame/y_sticker_cut_2.png"
-    xoffset chibi_y.charOffset xzoom chibi_y.charZoom
-    sticker_hop
-    xoffset 0 xzoom 1
-    "y_sticker_cut"
-
-image y_sticker hopg:
-    "gui/poemgame/y_sticker_2g.png"
-    xoffset chibi_y.charOffset xzoom chibi_y.charZoom
-    sticker_hop
-    xoffset 0 xzoom 1
-    "y_sticker"
-
-image m_sticker hop:
-    "gui/poemgame/m_sticker_2.png"
-    xoffset chibi_m.charOffset xzoom chibi_m.charZoom
-    sticker_hop
-    xoffset 0 xzoom 1
-    "m_sticker"
-
-image y_sticker glitch:
-    "gui/poemgame/y_sticker_1_broken.png"
-    xoffset chibi_y.charOffset xzoom chibi_y.charZoom zoom 3.0
-    block:
-        function chibi_y.randomPauseTime
-        parallel:
-            sticker_move_n
-        parallel:
-            function chibi_y.randomMoveTime
-        repeat
-
-transform sticker_left:
-    xcenter 100 yalign 0.9 subpixel True
-
-transform sticker_mid:
-    xcenter 220 yalign 0.9 subpixel True
-
-transform sticker_right:
-    xcenter 340 yalign 0.9 subpixel True
-
-transform sticker_mright:
-    xcenter 330 yalign 0.5 subpixel True
-
-transform sticker_mleft:
-    xcenter 100 yalign 0.5 subpixel True
-
-transform sticker_glitch:
-    xcenter 50 yalign 1.8 subpixel True
-
-transform sticker_m_glitch:
-    xcenter 100 yalign 1.35 subpixel True
-
-transform sticker_move_n:
-    easein_quad .08 yoffset -15
-    easeout_quad .08 yoffset 0
-
-transform sticker_hop:
-    easein_quad .18 yoffset -80
-    easeout_quad .18 yoffset 0
-    easein_quad .18 yoffset -80
-    easeout_quad .18 yoffset 0

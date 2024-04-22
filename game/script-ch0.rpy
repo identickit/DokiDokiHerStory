@@ -89,7 +89,7 @@ label ch0:
     y "You don't have to be prefect, Koto. No matter what she says."
     y "There's people out there who will always see how incredible and irreplaceable you are."
     k "Yuri..."
-    #bell ringing sfx
+    play sound wnb
     "The bell rings, signaling the end of our lunch period."
     show yuri oe at t11
     "Yuri and I stand and look each other for a moment before she breaks our silence."
@@ -250,9 +250,9 @@ label ch0:
     "I immediately slap my hand over my mouth and try not to scream."
     "My mother is lying on her bed..."
     "And her head is completely detached from her-"
-    #scene bg cemetery
-    #with dissolve_scene_full
-    #play music
+    scene bg cemetery
+    with dissolve_scene_full
+    play music wnx
     "I don't know how I haven't burst into tears at this point."
     "She's been gone for two weeks now, but it still doesn't feel real."
     "Yuri is silently crying next to me."
@@ -266,7 +266,7 @@ label ch0:
     scene black
     with dissolve_scene_full
     stop music fadeout 2.0
-    "You're still more than welcome at our place, if you'd like to stay for a while?"
+    y "You're still more than welcome at our place, if you'd like to stay for a while?"
     "I manage to speak between sobs."
     k "I don't... wanna bother you... or your parents..."
     y "You wouldn't. I promise."
@@ -305,9 +305,15 @@ label ch0:
     call screen fakeexception
 
 label ch0_breathe:
+    show screen player_input_disable
     scene black
-    pause 2.0
-    "test"
+    play sound buzz
+    pause 14.8
+    stop sound
+    hide screen player_input_disable
+    $ run_input ("", "Deleting previous 120 seconds of gameplay history.")
+    pause 3.0
+    hide screen console_screen
     return
 
 label ch0_p2:
@@ -485,10 +491,32 @@ label ch0_p2:
     "I take the pen and look up at Yuri."
     return
 
-    
-
-
-
+label poembossfinish:
+    scene black
+    stop music
+    stop audio
+    call screen dialogyn("There. Was that interesting enough for you?", yes_action=Return(1), no_action=Return(2))
+    if _return == 1:
+        "Oh."
+        "Well, I'm at least somewhat glad that you could receive some genuine level of enjoyment from that."
+        "But why? Why couldn't you just accept that nothing else was supposed to happen?"
+    if _return == 2:
+        "Womp womp."
+        "You were so adamant that something else had to happen, so that's what you got."
+        "... Why? Why couldn't you just accept that nothing else was supposed to happen?"
+    "I get that things ended abruptly, but as I mentioned before... if you even bothered to listen to me long enough..."
+    "I'm not running these projects to try and have any full on control over their world."
+    "I just want to see how they enjoy different versions of their world."
+    "And I want to see what interests you all for Codename: Celebration."
+    "... Anyway, at the absolute least, I hope this was worth your time."
+    "Even if there's tropes or mechanics that have been seen before, I still put a lot of thought into this project."
+    "And I'll be continuing to put real effort into Codename: S&E, uh..."
+    "Actually, I think that's my only other project left before I go ahead and roll with the big one."
+    "But yeah... thanks for being here. Even if you shouldn't have tried to make something out of nothing at the end there."
+    "Guess I'll talk to you later."
+    "Oh, and one more thing to lighten the mood a little:"
+    "{cps=12}The Fitness Gram Pacer Test is a{nw}"
+    call cred
 
 
 

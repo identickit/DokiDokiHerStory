@@ -670,7 +670,7 @@ screen main_menu():
         add "menu_art_m_ghost"
     else:
         if persistent.playthrough != 4:
-            add "menu_art_m"
+            add "menu_art_y"
             add "menu_fade"
 
     if gui.show_name:
@@ -1725,6 +1725,35 @@ init -501 screen double_name_input(message, ok_action):
             textbutton _("OK") action ok_action
 
 
+screen dialogyn(message, yes_action, no_action):
+
+    ## Ensure other screens do not get input while this screen is displayed.
+    modal True
+
+    zorder 200
+
+    style_prefix "confirm"
+
+    add "gui/overlay/confirm.png"
+
+    frame:
+
+        vbox:
+            xalign .5
+            yalign .5
+            spacing 30
+
+            label _(message):
+                style "confirm_prompt"
+                xalign 0.5
+
+            hbox:
+                xalign 0.5
+                spacing 100
+
+                textbutton _("YES") action yes_action
+                textbutton _("NO") action no_action
+
 screen dialog(message, ok_action):
 
     ## Ensure other screens do not get input while this screen is displayed.
@@ -2147,18 +2176,12 @@ screen player_input_disable():
     key "shift_K_PERIOD" action NullAction() 
     key ">" action NullAction() 
 
-screen my_timer():
+screen pbtimer():
     text "[clock]" size 72 color "#FFF"
-    if clock < 66:
-        timer 1 repeat True action [
-                SetVariable("clock", clock + 1),
-                renpy.restart_interaction
-            ]
-    else:
-        timer 1 action [
-                Hide("my_timer")
-            ]
-
+    timer 1 repeat True action [
+            SetVariable("clock", clock + 1),
+            renpy.restart_interaction
+        ]
 screen fakeexception:
     
     add "#dadada"
