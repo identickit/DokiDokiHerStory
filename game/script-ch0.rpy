@@ -6,7 +6,7 @@ label ch0:
     play music wn6
     "My alarm goes off on my phone."
     "I slowly reach to turn it off, but instead of feeling the flat surface of my phone..."
-    "I jerk my hand back quickly and sit straight up in my bed."
+    "I jerk my hand back in pain and sit straight up in my bed."
     "I shouldn't have placed my broken watch so close to my phone."
     "Sure, I needed a reminder to get it fixed, but this is a bit more than a reminder now."
     "I get up and pull out a bandage from a nearby cabinet."
@@ -55,7 +55,7 @@ label ch0:
     scene bg cafeteria
     with dissolve_scene_full
     play music wok
-    k "Mother's gonna to kill me for sure now."
+    k "Mother's going to kill me for sure now."
     show yuri turned curi me oe at t11
     y "I'm sure whatever it is isn't as bad as it seems."
     k "I got an 84 on my Chemistry exam."
@@ -63,7 +63,7 @@ label ch0:
     show yuri turned neut cm e1b at t11
     y "Okay, that's admittedly pretty bad."
     show yuri turned flus e1a cm at t11
-    y "Not the grade, of course. I personally believe your grades aren't prefect reflections-"
+    y "Not the grade, of course. I personally believe your grades aren't perfect reflections-"
     k "-of your true potential. I know. You always see the best in everyone."
     k "I love you for that."
     show yuri turned happ cm oe blus at t11
@@ -76,7 +76,7 @@ label ch0:
     k "Yeah... He's always had my back, hasn't he?"
     k "... Reminds me of when we were little and he took us both to the mall."
     show yuri ce at t11
-    k "We knocked over those mannequins and covered for us when Mother saw the resulting scene."
+    k "We knocked over those mannequins and he covered for us when Mother saw the resulting scene."
     "I laugh to myself for a minute before noticing the look on my cousin's face."
     show yuri turned neut oe ma at t11
     y "..."
@@ -89,12 +89,12 @@ label ch0:
     y "You don't have to be prefect, Koto. No matter what she says."
     y "There's people out there who will always see how incredible and irreplaceable you are."
     k "Yuri..."
-    play sound wnb
+    #play sound wnb
     "The bell rings, signaling the end of our lunch period."
     show yuri oe at t11
     "Yuri and I stand and look each other for a moment before she breaks our silence."
     y "It's going to be okay, Silver."
-    k "... Thank you, Lavender."
+    k "... Thank you, Lav."
     "It has to have been years since we've called each other by those names."
     "But it manages to make my heart jump a little, the same way it did when I got to hang with my cousin back then."
     ##scene 3
@@ -105,7 +105,7 @@ label ch0:
     "... Where I apparently don't sit anymore?"
     show na 1a at t11 
     k "Excuse me, ma'am? I believe this is my seat."
-    na "Oh, sorry! Somebody took my seat and I'm uh..."
+    na "Oh, sorry! Somebody took my seat, and I'm, uh..."
     na "Honestly, I'm not the kind of person who likes confrontations..."
     k "... No worries, Miss..."
     na "No need to call me by my last name. I'm Naomi."
@@ -130,7 +130,7 @@ label ch0:
     "..."
     "{i}No{/i}..."
     "He can't be serious..."
-    "Mother is going to kill me if I get anything below a 90 on an exam..."
+    "Mother is going to kill me if I get anything below a 90 on another exam..."
     "Once the bell rings and everyone starts filing out, I approach my teacher."
     k "Excuse me, sir?"
     t "Ah, how may I help you, Kotonoha?"
@@ -239,9 +239,10 @@ label ch0:
     "Yuri doesn't respond."
     "After a few seconds, I open my mouth to ask Yuri if she's found her phone yet."
     "But I'm stopped by..."
-    "{cps=10}... the most horrible scream I've ever heard.{/cps}"
+    play music wtm
+    "... the most horrible scream I've ever heard."
     k "Yuri? Are you okay??"
-    "I run as fast as I can to where Yuri sounds like she is, my mother's room."
+    "I run as fast as I can to where the scream came from: my mother's room."
 
     #scene 5
     scene bg koto_bedroom
@@ -249,7 +250,10 @@ label ch0:
     k "Yu-"
     "I immediately slap my hand over my mouth and try not to scream."
     "My mother is lying on her bed..."
+    stop music
     "And her head is completely detached from her-"
+    scene black
+    pause 4.0
     scene bg cemetery
     with dissolve_scene_full
     play music wnx
@@ -259,7 +263,7 @@ label ch0:
     "I haven't seen my father at all since the morning before Mother passed."
     y "Koto?"
     "I look at Yuri and tilt my head slightly."
-    y "It's... It's gonna be okay."
+    y "It's... It's going to be okay."
     k "I know..."
     "My voice cracks as I say this."
     "The moment finally comes as I bury my face in her shoulder and start sobbing."
@@ -267,10 +271,10 @@ label ch0:
     with dissolve_scene_full
     stop music fadeout 2.0
     y "You're still more than welcome at our place, if you'd like to stay for a while?"
+    play music wah
     "I manage to speak between sobs."
     k "I don't... wanna bother you... or your parents..."
     y "You wouldn't. I promise."
-    #play music wah fadein 1.0
     "Neither of us say anything for a while."
     "After I've cried for what feels like a lifetime, I start to calm down."
     k "Lav?"
@@ -278,28 +282,18 @@ label ch0:
     "A smile pulls at my mouth despite the somber moment."
     k "... She knew that I still loved her even if she aggravated the hell out of me, right?"
     "Yuri chuckles a little."
+    stop music fadeout 2.0
     "She gently lets go of me to meet my eyes."
-    "Of course she-"
-    #play music wnh
-    y "{b}DIDN'T{/b}"
-    y "{b}DIDN'T{/b}"
-    y "{b}DIDN'T{/b}"
-    y "{b}DIDN'T{/b}"
-    y "{b}SHE{/b}"
-    y "{b}HATED{/b}"
-    y "{b}YOU{/b}"
-    y "{b}JUST{/b}"
-    y "{b}LIKE{/b}"
-    y "{b}EVERY{/b}"
-    y "{b}ONE{/b}"
-    y "{b}ELSE{/b}"
-    y "{b}YOU'RE{/b}"
-    y "{b}JUST{/b}"
-    y "{b}A{/b}"
-    y "{b}WHINY{/b}"
-    y "{b}IDIOTIC{/b}"
-    y "{b}SELFISH{/b}"
-    y "{b}BITCH{/b}"
+    play music wnn
+    y "{cps=18}{b}NO.{/b}{/cps}"
+    y "{cps=18}{b}SHE DIDN'T.{/b}{/cps}"
+    y "{cps=18}{b}SHE HATED YOU.{/b}{/cps}"
+    y "{cps=18}{b}SHE HATED YOU JUST LIKE EVERYONE ELSE.{/b}{/cps}"
+    y "{cps=18}{b}YOU'RE JUST A WHINY{/b}{/cps}"
+    y "{cps=18}{b}IDIOTIC{/b}{/cps}"
+    y "{cps=18}{b}SELFISH{/b}{/cps}"
+    y "{cps=18}{b}BITCH.{/b}{/cps}"
+    stop music
     window hide
     $ nt = 0
     call screen fakeexception
@@ -336,13 +330,9 @@ label ch0_p2:
     k "{i}Yes.{/i}"
     show yuri turned neut cm oe at t11
     y "Please don't take that kind of tone with me. You know I'm just-"
-    k "Yuri, I don't mean to sound rude but please stop talking like that."
+    k "Yuri, I don't mean to sound rude, but please stop talking like that."
     show yuri turned dist me at t11
-    k "You sound exactly like my mother and it still hurts to be rem..."
-    k "..."
-    show yuri turned happ me b1b e1a at t11
-    y "To be reminded of the last time you saw her?"
-    k "... Yeah."
+    k "You sound exactly like my mother, and it... still hurts to think of her."
     show yuri turned sad cm ce at t11
     y "My apologies."
     y "I'm just really worried about my cousin."
@@ -429,7 +419,7 @@ label ch0_p2:
     pause 2.0
     show yuri oe at t11
     y "Koto..."
-    y "Could you not have at least texted me to inform me that you wouldn't be walking home with me?"
+    y "Could you not have at least texted to inform me that we wouldn't be walking home together?"
     k "I didn't even know I was-"
     show yuri e4a at t11
     y "I'm aware. But please..."
@@ -466,8 +456,8 @@ label ch0_p2:
     k "... I don't have to be perfect enough for anyone anymore."
     k "That... probably sounds horrible, but it's..."
     k "I don't even know."
-    k "But you... a-acting so much like her right now..."
-    k "It hurts in ways that... would sound really dumb if I tried to explain."
+    k "But you're... a-acting so much like her right now..."
+    k "... It hurts in ways that... would sound really dumb if I tried to explain."
     k "... You can say what you want to now. I'm done."
     "Yuri takes a step closer to me and grabs my hands gently."
     show yuri turned laug cm e1a at t11
