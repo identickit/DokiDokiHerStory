@@ -97,11 +97,22 @@ label ch0:
     k "... Thank you, Lav."
     "It has to have been years since we've called each other by those names."
     "But it manages to make my heart jump a little, the same way it did when I got to hang with my cousin back then."
+    "... Those few times when I got to truly spend time with her."
+    "Those few times when Mother would let me see Yuri."
+    scene bg corridor with wipeleft
+    "Most times, Mother would be mad at me and take various privileges away."
+    "One of those privileges being my time with my cousin."
+    "All because I was 'slacking off' and getting 85's, supposedly due to having fun with Yuri."
+    "Because I'm some sort of attention-seeking bitch who hurts herself for popularity."
+    "..."
+    "If the only way Mother wants to talk to me is by yelling or scrutinizing me..."
+    "Then I would rather live with Yuri, someone who never judges me."
+    "... And someone who really cares about me."
     ##scene 3
     scene bg class_day
     with dissolve_scene_full
     #play music tkoto
-    "I enter my next class, heading towards the front of the room..."
+    "While making an effort to push my thoughts aside, I enter my next class and head towards the front of the room..."
     "... Where I apparently don't sit anymore?"
     show na 1a at t11 
     k "Excuse me, ma'am? I believe this is my seat."
@@ -159,7 +170,7 @@ label ch0:
     t "And if it helps any, I'll hold on to your exam. If your mother asks what you made..."
     t "Feel free to tell her I needed some extra time to grade everyone's exams this time around."
     k "Thank you so much."
-    "I bow and wish him a great rest of his day"
+    "I bow and wish him a great rest of his day."
     ##scene 4
     scene bg residential_day
     with dissolve_scene_full
@@ -169,7 +180,13 @@ label ch0:
     k "Everything's going to work out, Kotonoha..."
     "I mutter this under my breath yet again during my commute alone."
     "But this time, I'm a bit more confident in saying it."
-    k "You're gonna be alright..."
+    "I'm going to be alright."
+    "Even if Mother snaps at me again... I have Father to help me through it."
+    "He's always been there for me, even during my lowest moments."
+    "He's willing to step up for me if Mother starts getting angry over something trivial."
+    "He always tries to make me feel less stressed under so much pressure."
+    "He'll help me through this if I need his support."
+    "Just thinking of this makes me feel a bit better about everything already."
     "I step onto my front porch and take a deep breath."
     k "Everything will work out."
     "I gently open the door."
@@ -506,7 +523,7 @@ label poembossfinish:
     "Guess I'll talk to you later."
     "Oh, and one more thing to lighten the mood a little:"
     "{cps=12}The Fitness Gram Pacer Test is a{nw}"
-    call cred
+    call cred from _call_cred
 
 
 
