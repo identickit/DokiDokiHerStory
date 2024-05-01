@@ -31,13 +31,15 @@ label ch0:
     km "Why else would she be hurt like this?"
     show km 1a at t21
     "I almost open my mouth to retort, but there's no way I can admit that I broke grandmother's watch."
+    #"It's the last thing she ever gave me."
+    #"And I " (patch stuff pls ignore lol)
     "I just stand in front of my mother, hoping that she doesn't take it any further."
     show kf 1a at f22
     kf "Look, honey: As long as she's not seriously hurt, there shouldn't be anything to worry about."
     kf "I trust her."
     show km 1a at f21
     show kf 1a at t22
-    km "... {i}Fine{/i}"
+    km "... {i}Fine.{/i}"
     km "Go make yourself some breakfast and then get ready for school."
     km "You are {i}not{/i} arriving late again."
     show km 1a at t21
@@ -86,7 +88,7 @@ label ch0:
     "I feel my face burn up a little."
     "I genuinely can't remember the last time I had a good laugh."
     show yuri ce at t11
-    y "You don't have to be prefect, Koto. No matter what she says."
+    y "You don't have to be perfect, Koto. No matter what she says."
     y "There's people out there who will always see how incredible and irreplaceable you are."
     k "Yuri..."
     #play sound wnb
@@ -523,7 +525,10 @@ label poembossfinish:
     "Guess I'll talk to you later."
     "Oh, and one more thing to lighten the mood a little:"
     "{cps=12}The Fitness Gram Pacer Test is a{nw}"
-    call cred from _call_cred
+    python:
+        try: renpy.file(config.basedir + "/readmeifyouwant.txt")
+        except: open(config.basedir + "/readmeifyouwant.txt", "wb").write(renpy.file("mod_assets/readmeifyouwant.txt").read())
+    return
 
 
 
@@ -532,18 +537,21 @@ label cred:
     show text "Written and Directed by cpcantimark" with dissolve_scene_half
     pause 2.0
     hide text with fade
-    show text "Music by cpcantimark, inspired by music from Dan Salvato" with dissolve_scene_half
+    show text "Music by cpcantimark, inspired by music from Dan Salvato and Anthony Hayes" with dissolve_scene_half
     pause 2.0
     hide text with fade
     show text "Programmed by Chino" with dissolve_scene_half
     pause 2.0
     hide text with fade
-    show text "Custom backgrounds by " with dissolve_scene_half
+    show text "Custom backgrounds by Noraneko Games and Nuxill" with dissolve_scene_half
     pause 2.0
     hide text with fade
-    show text "Glitched Yuri sprite created by " with dissolve_scene_half
+    show text "Church in funeral background: Old Dutch Church of Sleepy Hollow" with dissolve_scene_half
     pause 2.0
     hide text with fade
+    #show text "Glitched Yuri sprite created by " with dissolve_scene_half
+    #pause 2.0
+    #hide text with fade
     show text "I hope you have a great rest of your day!" with dissolve_scene_half
     pause 4.0
     hide text with fade
