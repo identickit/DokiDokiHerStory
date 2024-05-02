@@ -898,6 +898,7 @@ screen about():
                 text "Made with GanstaKingofSA's {a=https://github.com/GanstaKingofSA/DDLCModTemplate2.0}DDLC Mod Template 2.0{/a}.\nCopyright © 2019-" + str(datetime.date.today().year) + " Azariel Del Carmen (GanstaKingofSA). All rights reserved.\n"
                 text "Doki Doki Literature Club. Copyright © 2017 Team Salvato. All rights reserved.\n"
                 text "Mod written and directed by cpcantimark.\nProgrammed by Chino (you madman).\nCustom music by cpcantimark, inspired by music from Dan Salvato and Anthony Hayes.\n"
+                text "glitch_api script created by Vladya, as seen in True Story.\n(Super sorry about leaving your work uncredited before now.)\n"
                 text "Custom backgrounds by Noraneko Games and Nuxill.\nChurch in (SPOILER) background: Old Dutch Church of Sleepy Hollow.\n"
                 text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n[renpy.license!t]")
 
