@@ -606,6 +606,12 @@ screen navigation():
             if not enable_extras_menu:
                 textbutton _("Credits") action ShowMenu("about")
 
+            if not enable_extras_menu:
+                textbutton _("Update Log") action ShowMenu("update_log")
+
+            if not enable_extras_menu:
+                textbutton _("Music Player") action ShowMenu("musplay")
+
             if renpy.variant("pc"):
 
                 ## Help isn't necessary or relevant to mobile devices.
@@ -895,12 +901,54 @@ screen about():
                 ## Do not touch/remove these unless the © or – symbol isn't available in your font.
                 ## You may add things above or below it.
                 ## If you are not going with a splashscreen option, this first line MUST stay in the mod.
-                text "Made with GanstaKingofSA's {a=https://github.com/GanstaKingofSA/DDLCModTemplate2.0}DDLC Mod Template 2.0{/a}.\nCopyright © 2019-" + str(datetime.date.today().year) + " Azariel Del Carmen (GanstaKingofSA). All rights reserved.\n"
-                text "Doki Doki Literature Club. Copyright © 2017 Team Salvato. All rights reserved.\n"
-                text "Mod written and directed by cpcantimark.\nProgrammed by Chino (you madman).\nCustom music by cpcantimark, inspired by music from Dan Salvato and Anthony Hayes.\n"
-                text "glitch_api script created by Vladya, as seen in True Story.\n(Super sorry about leaving your work uncredited before now.)\n"
-                text "Custom backgrounds by Noraneko Games and Nuxill.\nChurch in (SPOILER) background: Old Dutch Church of Sleepy Hollow.\n"
-                text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n[renpy.license!t]")
+                text "Made with GanstaKingofSA's {a=https://github.com/GanstaKingofSA/DDLCModTemplate2.0}DDLC Mod Template 2.0{/a}.\nCopyright © 2019-" + str(datetime.date.today().year) + " Azariel Del Carmen (GanstaKingofSA). All rights reserved.\n" xalign .5
+                text "Doki Doki Literature Club. Copyright © 2017 Team Salvato. All rights reserved.\n" xalign .5
+                text "Mod written and directed by cpcantimark.\nProgrammed by Chino (you madman).\nCustom music by cpcantimark, inspired by music from Dan Salvato and Anthony Hayes.\n" xalign .5
+                text "glitch_api script created by Vladya, as seen in True Story.\n(Super sorry about leaving your work uncredited before now.)\n" xalign .5
+                text "Custom backgrounds by Noraneko Games and Nuxill.\nChurch in (SPOILER) background: Old Dutch Church of Sleepy Hollow.\n" xalign .5
+                text "Also uhh shoutout to uhhh how do i spell this... eh i'll just\npaste it here Deceptive Hearts (a guy named codex asked me to put this here so there lol)\n" xalign .5
+                text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n[renpy.license!t]") xalign .5
+
+screen update_log():
+    
+    tag menu
+
+    use game_menu(_("Update Log"), scroll="viewport"):
+        
+        style_prefix "updatelog"
+
+        window:
+            xoffset 35
+            has fixed:
+                yfit True
+
+            vbox:
+                label "Version 1.1.0:" xalign 0
+                text "- Added a little more to a few parts of the story.\n(Specifically, more has been added in regards to the watch and Naomi.\nOther additions and changes have been made to fit with these major ones.)\n- Added proper credit to Vladya, who created the\nglitch_api file from True Story that is utilized in this mod.\n(Our apologies for not doing this on initial release!)\n- Fixed one or two previously-missed grammatical and spelling errors.\n- Fixed the “readmeifyouwant” text file.\n"
+                text "Version 1.0.0.1:\n- Initial public release."
+
+screen musplay():
+
+    tag menu
+
+    use game_menu(_("Music Player"), scroll="viewport"):
+    
+        style_prefix "about"
+
+        window:
+            xoffset 35
+            has fixed:
+                yfit True
+
+            vbox:
+                add Transform("mod_assets/constructionlogo.png", size=(304,245)) xalign .5
+
+                null height 5
+                
+                label "The Music Player is currently under construction!" xalign .5
+                text "We're aiming to finish it by the Act II release of DDMC Celebration.\n" xalign .5
+                text "Once it's done, you'll be able to listen to your favorite songs\nfrom the Celebration! soundtrack, including music featured in\nHer Story and the other side mods.\n" xalign .5
+                text "(Note: The Music Player will not be included in\nNatsuki Rants About DDLC Mods And Community due to the mod\nonly having one used song.)" xalign .5
 
 
 ## This is redefined in options.rpy to add text to the about screen.
@@ -929,6 +977,26 @@ style hyperlink_text:
     idle_color gui.idle_color
     hover_color gui.hover_color
     hover_underline True
+
+style updatelog_window is empty
+style updatelog_label is gui_label
+style updatelog_label_text is gui_label_text
+style updatelog_text is gui_text
+
+define gui.updatelog = ""
+
+style updatelog_label_text:
+    color "#000"
+    outlines []
+    text_align 0
+    size gui.label_text_size
+
+style updatelog_text:
+    color "#000"
+    outlines []
+    size gui.text_size
+    text_align 0
+    layout "subtitle"
 
 ## Load and Save screens #######################################################
 ##

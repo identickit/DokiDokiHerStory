@@ -30,10 +30,12 @@ label ch0:
     km "Don't you dare try to get her off the hook!"
     km "Why else would she be hurt like this?"
     show km 1a at t21
-    "I almost open my mouth to retort, but there's no way I can admit that I broke grandmother's watch."
-    #"It's the last thing she ever gave me."
-    #"And I " (patch stuff pls ignore lol)
-    "I just stand in front of my mother, hoping that she doesn't take it any further."
+    "I almost open my mouth to retort, but there's no way I can admit that I broke Grandmother's watch."
+    #(dialogue marked off as notes is patch stuff pls ignore lol)
+    "It's the last thing she ever gave me."
+    "And without thinking, I smashed it out of rage following an argument with Mother."
+    "(It's a miracle that she hasn't already seen it in my room by now.)"
+    "... I just stand in front of my mother, hoping that she doesn't take this any further."
     show kf 1a at f22
     kf "Look, honey: As long as she's not seriously hurt, there shouldn't be anything to worry about."
     kf "I trust her."
@@ -91,11 +93,24 @@ label ch0:
     y "You don't have to be perfect, Koto. No matter what she says."
     y "There's people out there who will always see how incredible and irreplaceable you are."
     k "Yuri..."
-    #play sound wnb
+    show yuri turned laug cm e1a nobl at t11
+    y "Sorry, sorry."
+    k "..."
+    k "Should I just tell her about the watch and get it over with?"
+    show yuri turned neut cm oe at t11
+    y "... I think that would be better than waiting for her to find out for herself."
+    k "Okay."
+    k "Okay... I'll do it."
+    k "It's just going to be hard to admit it. Father said she always wanted that watch when she was younger."
+    k "Apparently, she was extremely jealous when Grandmother gave it to me instead of her."
+    k "Maybe that's part of why Mother has been so fed up with me the past few months."
+    show yuri turned neut om oe at t11
+    y "Well..."
+    show yuri turned neut cm oe at t11
     "The bell rings, signaling the end of our lunch period."
-    show yuri oe at t11
     "Yuri and I stand and look each other for a moment before she breaks our silence."
-    y "It's going to be okay, Silver."
+    show yuri turned laug cm e1a nobl at t11
+    y "It's all going to be okay, Silver."
     k "... Thank you, Lav."
     "It has to have been years since we've called each other by those names."
     "But it manages to make my heart jump a little, the same way it did when I got to hang with my cousin back then."
@@ -109,7 +124,7 @@ label ch0:
     "..."
     "If the only way Mother wants to talk to me is by yelling or scrutinizing me..."
     "Then I would rather live with Yuri, someone who never judges me."
-    "... And someone who really cares about me."
+    "... Someone who really cares about me." 
     ##scene 3
     scene bg class_day
     with dissolve_scene_full
@@ -183,11 +198,12 @@ label ch0:
     "I mutter this under my breath yet again during my commute alone."
     "But this time, I'm a bit more confident in saying it."
     "I'm going to be alright."
-    "Even if Mother snaps at me again... I have Father to help me through it."
+    "Even if Mother snaps at me again, even if she yells at me for admitting I broke the watch..."
+    "I have Father to help me through it."
     "He's always been there for me, even during my lowest moments."
     "He's willing to step up for me if Mother starts getting angry over something trivial."
     "He always tries to make me feel less stressed under so much pressure."
-    "He'll help me through this if I need his support."
+    "He'll probably do anything to help me through this if I need his support."
     "Just thinking of this makes me feel a bit better about everything already."
     "I step onto my front porch and take a deep breath."
     k "Everything will work out."
@@ -246,17 +262,20 @@ label ch0:
     "Still no answer."
     "I make a small sound that sounds awfully similar to when I lost my parents once when I was much younger."
     show yuri me at t11
-    y "How about I look to see if they're here and just aren't answering for some reason?"
+    y "How about we look to see if they're here and just aren't answering for some reason?"
     "I nod slightly."
     show yuri at thide
     hide yuri
-    "I try calling again..."
-    "And again..."
-    y "Hey, Koto, I think I hear her phone buzzing somewhere over here."
-    y "She might have gone out to do something and forgot it?"
+    "The first place that comes to my mind, for some reason, is my room."
+    "I look inside and immediately notice that Grandmother's watch is gone."
+    "{i}She must've found it.{/i}"
+    "... There's likely no chance of her taking it somewhere to be fixed before punishing me."
+    "I go back to the living room and try calling her again."
+    y "Hey, Koto, I think I hear a phone buzzing somewhere over here."
+    y "She might have gone out to do something and forgotten her phone?"
     k "That doesn't sound like her, though..." 
     "Yuri doesn't respond."
-    "After a few seconds, I open my mouth to ask Yuri if she's found her phone yet."
+    "After a few seconds, I open my mouth to ask Yuri if she's found the phone yet."
     "But I'm stopped by..."
     play music wtm
     "... the most horrible scream I've ever heard."
@@ -278,8 +297,8 @@ label ch0:
     play music wnx
     "I don't know how I haven't burst into tears at this point."
     "She's been gone for two weeks now, but it still doesn't feel real."
-    "Yuri is silently crying next to me."
     "I haven't seen my father at all since the morning before Mother passed."
+    "By now, it feels like I'm never going to see him again."
     y "Koto?"
     "I look at Yuri and tilt my head slightly."
     y "It's... It's going to be okay."
@@ -364,14 +383,74 @@ label ch0_p2:
     hide yuri
 
     #scene 2
+    scene bg class_day
+    with dissolve_scene_full
+    "As soon as class ends, I pack up my belongings and get ready for my advisory period."
+    "I've been going to the music room lately since not many people use it in their free time."
+    "It gives me a chance to isolate myself from everything and collect my thoughts."
+    show na 1a at t11
+    na "Hey."
+    k "Oh, hello, Naomi."
+    na "..."
+    na "I guess I just... wanted to see how you're doing?"
+    "I shrug and let out a sigh."
+    k "Did Yuri ask you to check up on me?"
+    na "No."
+    na "I'm genuinely concerned about you."
+    k "Why? You barely know me."
+    na "Well, yes. But that doesn't mean I can't recognize someone going through a lot."
+    k "..."
+    na "You're not taking it very well, are you?"
+    "Why is it even her business to be asking me about all of this?"
+    "We haven't talked more than once or twice since we met."
+    "What right does she have to..."
+    "..."
+    #"{i}Are you even listening to yourself right now?{/i}"
+    play music wn20
+    "Why am I thinking like this?"
+    "She's going out of her way to see how I'm holding up."
+    "I should probably feel grateful, {i}especially{/i} since we've barely talked to each other."
+    "It's not like Father is here to help me through anything anymore."
+    "..."
+    "... I shake my head weakly."
+    k "No, I'm not."
+    k "My mind keeps telling me to shut everyone out."
+    k "Everyone who wants to help me feel better."
+    k "Even Yuri, to an extent."
+    k "And I almost just snapped at you just because you asked how I was doing."
+    k "I'm... definitely not taking it well."
+    na "It's okay to not be okay."
+    na "But it isn't good for you to bottle up your pain."
+    na "So... if you want to try and talk about what's going through your mind, I'd be happy to listen."
+    k "Thank you... I'll keep that in mind."
+    k "I should probably be headed to advisory now, though..."
+    "Naomi looks at her phone and realizes what time it is."
+    na "Sorry, I wasn't trying to take up too much of your time!"
+    k "No no, don't worry about it."
+    na "Here..."
+    "She pulls up her list of contacts on her phone and hands it to me."
+    na "I'll text you later. Whenever you wanna talk about everything, I'll be here."
+    na "... Not at school, obviously, but... You get what I mean, right?"
+    k "Of course. I really appreciate it, Naomi."
+    "I type my number into her phone and hand it back to her."
+    #"She stands there for a moment before handing it back to me."
+    #na "I uh... don't know how to spell your name."
+    #"I smile politely and type my name in as well."
+    "After she takes her phone back, we leave the classroom and part ways."
     scene bg music_room
     with dissolve_scene_full
-    play music wn20
+    #play music wn20
     "I'm sitting alone in front of the piano."
-    "I've made a sort of habit of this during my advisory periods lately."
-    "For the first time, however, I hear the door open while lost in thought."
+    "The whole time, I've been thinking about my conversation with Naomi."
+    "Maybe the reason I'm shutting out the people who want to help me is my father."
+    "If somebody who was always there for me suddenly disappeared from my life..."
+    "Will everyone else be the same way?"
+    "I know it's dumb logic, but it would explain why I keep feeling like I can't let anyone be here for me."
+    stop music fadeout 1.0
+    "In the middle of my train of thought, I hear the door open."
     "The sound makes me jump a little, but I quickly regain my composure and..."
     show monika forward nerv mb ce n2 at t11
+    $ m_name = "???"
     m "O-Oh, sorry! I didn't know anyone was going to be in here today."
     "Huh? I'm always..."
     "Wait, how long have I been here? Is the school day already over?"
@@ -406,11 +485,13 @@ label ch0_p2:
     "I feel my face starting to turn red."
     k "Thank you... Mi... Mo..."
     show monika forward oe at t11
+    $ m_name = "Mo..."
     m "Do you want me to-"
     k "Monika? Right?"
     show monika forward neut me b2a at t11
     m "Oh-"
     show monika forward neut n3 e1a ma b1a at t11
+    $ m_name = "Monika"
     m "Yes, that's my name!"
     k "Great. See you Saturday, Monika."
     "I walk down to the front of the{nw}"
